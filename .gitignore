@@ -1,0 +1,18 @@
+node_modules/
+dist/
+*.js.map
+*.d.ts
+.DS_Store
+Thumbs.db
+*.log
+
+# Ignore internal markdown docs
+AGENTS.md
+ARCHITECTURE.md
+PLAN.md
+DESIGN.md
+IMPLEMENTATION.md
+IDEA.md
+
+# Keep README tracked
+!README.md

@@ -1,0 +1,49 @@
+{
+  "name": "klycky",
+  "version": "1.0.0",
+  "description": "A beautiful, terminal-native typing application for developers",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "klycky": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "lint": "eslint src/ --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "typing",
+    "typing-test",
+    "terminal",
+    "cli",
+    "monkeytype",
+    "developer-tools",
+    "wpm",
+    "terminal-ui",
+    "ascii",
+    "productivity"
+  ],
+  "author": "Debpriyo Ghosal",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ]
+}
