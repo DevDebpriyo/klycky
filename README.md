@@ -4,7 +4,7 @@
 
 **Klycky** is a minimalist, high-performance CLI typing test and terminal UI designed as a lightweight, offline alternative to Monkeytype for developers. Enhance your typing speed, track your productivity, measure your WPM, and practice touch typing directly in your terminal without any distractions.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-GPLv3-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![npm](https://img.shields.io/npm/v/klycky)
 ![downloads](https://img.shields.io/npm/dm/klycky)
@@ -170,4 +170,4 @@ npm run dev
 
 ## 📄 License
 
-MIT © Klycky Contributors
+GPL-3.0 © Klycky Contributors

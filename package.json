@@ -28,7 +28,7 @@
     "productivity"
   ],
   "author": "Debpriyo Ghosal",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
@@ -45,5 +45,13 @@
     "dist/",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevDebpriyo/klycky.git"
+  },
+  "homepage": "https://github.com/DevDebpriyo/klycky#readme",
+  "bugs": {
+    "url": "https://github.com/DevDebpriyo/klycky/issues"
+  }
 }

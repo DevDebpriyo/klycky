@@ -5,6 +5,7 @@ dist/
 .DS_Store
 Thumbs.db
 *.log
+*.tgz
 
 # Ignore internal markdown docs
 AGENTS.md
