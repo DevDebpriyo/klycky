@@ -1,6 +1,6 @@
 {
   "name": "klycky",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A beautiful, terminal-native typing application for developers",
   "type": "module",
   "main": "dist/index.js",
