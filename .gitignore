@@ -6,6 +6,7 @@ dist/
 Thumbs.db
 *.log
 *.tgz
+*.rar
 
 # Ignore internal markdown docs
 AGENTS.md

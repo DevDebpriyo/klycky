@@ -1,15 +1,4 @@
-/**
- * Klycky - Status Bar & Chrome Renderer
- *
- * Renders all UI chrome: logo, mode/timer, separator, live stats, footer.
- * Each function targets ONLY its assigned rows — never touches other regions.
- *
- * Region isolation ensures:
- * - Logo renders once (not on every keystroke)
- * - Timer updates only the mode row
- * - Typing area is never affected by chrome renders
- * - Footer is static unless state changes
- */
+
 
 import { getTheme } from '../themes/themeLoader.js';
 import { fgHex, bgHex } from '../themes/themeTypes.js';
@@ -24,19 +13,11 @@ import { getConfig } from '../config/index.js';
 import { renderLargeText } from '../utils/asciiFont.js';
 import { getBestWpm } from '../stats/history.js';
 
-// ─── Logo ────────────────────────────────────────────────────
-// Rendered once per full paint. Not redrawn on keystrokes.
-
-/**
- * Render the Klycky logo/brand on the logo row.
- * Clean, minimal ASCII identity — NOT noisy art.
- */
 export function renderLogo(): void {
   const theme = getTheme();
   const layout = calculateLayout();
   const bg = bgHex(theme.colors.background);
 
-  // Elegant minimal branding
   const logo =
     ANSI.BOLD +
     fgHex(theme.colors.accent) + bg +
@@ -48,31 +29,24 @@ export function renderLogo(): void {
     ANSI.RESET;
 
   clearRow(layout.logoRow);
-  write(ANSI.moveTo(layout.logoRow, layout.leftMargin) + logo);
+  const infoButton = ANSI.BOLD + fgHex(theme.colors.dimmed) + bg + ' ⓘ ' + ANSI.RESET;
+  const infoCol = layout.leftMargin + layout.contentWidth - 3;
+  write(ANSI.moveTo(layout.logoRow, layout.leftMargin) + logo + ANSI.moveTo(layout.logoRow, infoCol) + infoButton);
 }
 
-// ─── Mode / Timer Row ────────────────────────────────────────
-// Updated on timer tick and state change. NOT on every keystroke.
-
-/** Last rendered timer string — skip redraw if unchanged */
 let lastTimerText = '';
 
-/**
- * Render the mode label and timer/progress on the mode row.
- * Skips redraw if the timer text hasn't changed (throttle by content).
- */
+// Renders mode row
 export function renderModeRow(session: TypingSession, config: KlyckyConfig, force: boolean = false): void {
   const theme = getTheme();
   const layout = calculateLayout();
   const bg = bgHex(theme.colors.background);
 
-  // Build mode label
   const modeLabel =
     fgHex(theme.colors.dimmed) + bg +
     config.mode +
     ANSI.RESET;
 
-  // Build progress info
   let progressText = '';
   if (session.state === 'active') {
     if (config.mode === 'time') {
@@ -95,7 +69,6 @@ export function renderModeRow(session: TypingSession, config: KlyckyConfig, forc
 
   const fullText = config.mode + ' ' + progressText + (session.capsLockActive ? ' CAPS' : '');
 
-  // Content-based throttle: skip redraw if text is identical
   if (!force && fullText === lastTimerText) return;
   lastTimerText = fullText;
 
@@ -104,7 +77,6 @@ export function renderModeRow(session: TypingSession, config: KlyckyConfig, forc
     progressText +
     ANSI.RESET;
 
-  // Separator dot
   const sep =
     fgHex(theme.colors.separator) + bg +
     '  ·  ' +
@@ -116,7 +88,6 @@ export function renderModeRow(session: TypingSession, config: KlyckyConfig, forc
     modeLabel + sep + progressStyled,
   );
 
-  // Subtle Caps Lock Warning (Right aligned)
   if (session.capsLockActive) {
     const warningText = 'caps lock is on';
     const warningCol = layout.leftMargin + layout.contentWidth - warningText.length;
@@ -127,18 +98,11 @@ export function renderModeRow(session: TypingSession, config: KlyckyConfig, forc
   }
 }
 
-/**
- * Reset the timer throttle cache (call on session restart).
- */
+// Resets timer cache
 export function resetTimerCache(): void {
   lastTimerText = '';
 }
 
-// ─── Separator ───────────────────────────────────────────────
-
-/**
- * Render the separator line below the header. Static region.
- */
 export function renderSeparator(): void {
   const theme = getTheme();
   const layout = calculateLayout();
@@ -153,13 +117,6 @@ export function renderSeparator(): void {
   write(ANSI.moveTo(layout.separatorRow, layout.leftMargin) + separator);
 }
 
-// ─── Live Stats ──────────────────────────────────────────────
-// Updated per keystroke, but only touches the stats row.
-
-/**
- * Render the live stats bar (WPM, sparkline, accuracy, flow).
- * Only writes to the stats row — never touches typing area.
- */
 export function renderLiveStats(session: TypingSession, config: KlyckyConfig): void {
   const layout = calculateLayout();
 
@@ -173,13 +130,11 @@ export function renderLiveStats(session: TypingSession, config: KlyckyConfig): v
 
   let statsLine = '';
 
-  // Live WPM
   const wpm = Math.round(session.calculateWpm());
   statsLine +=
     fgHex(theme.colors.dimmed) + bg + 'wpm ' + ANSI.RESET +
     ANSI.BOLD + fgHex(theme.colors.accent) + bg + `${wpm}` + ANSI.RESET;
 
-  // Sparkline
   if (config.showSparkline && session.wpmSamples.length > 1) {
     const sparkline = generateSparkline(session.wpmSamples, 15);
     statsLine +=
@@ -187,7 +142,6 @@ export function renderLiveStats(session: TypingSession, config: KlyckyConfig): v
       fgHex(theme.colors.accentSecondary) + bg + sparkline + ANSI.RESET;
   }
 
-  // Accuracy
   if (config.showAccuracy) {
     const accuracy = session.calculateAccuracy();
     const meter = generateAccuracyMeter(accuracy, 8);
@@ -197,7 +151,6 @@ export function renderLiveStats(session: TypingSession, config: KlyckyConfig): v
       fgHex(accColor) + bg + meter + ANSI.RESET;
   }
 
-  // Flow indicator
   const flow = generateFlowIndicator(session.currentStreak);
   if (flow) {
     statsLine +=
@@ -208,12 +161,7 @@ export function renderLiveStats(session: TypingSession, config: KlyckyConfig): v
   write(ANSI.moveTo(layout.statsRow, layout.leftMargin) + statsLine);
 }
 
-// ─── Footer ──────────────────────────────────────────────────
-
-/**
- * Render the footer hints. Only redrawn on state changes, not keystrokes.
- */
-export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command'): void {
+export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command' | 'about'): void {
   const theme = getTheme();
   const layout = calculateLayout();
   const bg = bgHex(theme.colors.background);
@@ -221,7 +169,6 @@ export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command'): v
   const fg = fgHex(theme.colors.foreground) + bg;
   const rst = ANSI.RESET;
 
-  // Footer separator
   clearRow(layout.footerSepRow);
   write(
     ANSI.moveTo(layout.footerSepRow, layout.leftMargin) +
@@ -229,7 +176,6 @@ export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command'): v
     '─'.repeat(layout.contentWidth) + rst,
   );
 
-  // Footer content based on current mode
   let content = '';
   switch (mode) {
     case 'results':
@@ -260,11 +206,6 @@ export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command'): v
   write(ANSI.moveTo(layout.footerRow, layout.leftMargin) + content);
 }
 
-// ─── Message Row ─────────────────────────────────────────────
-
-/**
- * Show a temporary message on the message row.
- */
 export function renderMessage(message: string): void {
   const theme = getTheme();
   const layout = calculateLayout();
@@ -279,20 +220,11 @@ export function renderMessage(message: string): void {
   }
 }
 
-/**
- * Clear the message row.
- */
 export function clearMessage(): void {
   const layout = calculateLayout();
   clearRow(layout.messageRow);
 }
 
-// ─── Session Summary ─────────────────────────────────────────
-
-/**
- * Render the session summary panel (shown after session completion).
- * Writes to the typing area rows + stats row — replaces typing text.
- */
 export function renderSessionSummary(session: TypingSession): void {
   const theme = getTheme();
   const layout = calculateLayout();
@@ -313,28 +245,22 @@ export function renderSessionSummary(session: TypingSession): void {
 
   const startRow = Math.max(layout.logoRow + 2, layout.typingStartRow - 2);
 
-  // Clear a large block
   for (let i = 0; i < 15; i++) {
     clearRow(startRow + i);
   }
 
-  // ─── SECTION A: PRIMARY STATS ───
-  
   const wpmAscii = renderLargeText(wpm.toString());
   const accAscii = renderLargeText(`${accuracy}%`);
   const bestAscii = renderLargeText(bestWpm.toString());
 
-  // Render them side-by-side
   const col1 = layout.leftMargin;
   const col2 = layout.leftMargin + 18;
   const col3 = layout.leftMargin + 36;
 
-  // Labels
   write(ANSI.moveTo(startRow, col1) + dim + 'wpm' + rst);
   write(ANSI.moveTo(startRow, col2) + dim + 'acc' + rst);
   write(ANSI.moveTo(startRow, col3) + dim + 'best' + rst);
 
-  // Big numbers
   for (let i = 0; i < 4; i++) {
     const row = startRow + 1 + i;
     write(ANSI.moveTo(row, col1) + ANSI.BOLD + accent + wpmAscii[i] + rst);
@@ -342,21 +268,18 @@ export function renderSessionSummary(session: TypingSession): void {
     write(ANSI.moveTo(row, col3) + dim + bestAscii[i] + rst);
   }
 
-  // ─── SECTION B: TEST DETAILS & SECONDARY STATS ───
   const detailsRow = startRow + 6;
-  
-  // Test type
+
   const config = getConfig();
   let modeInfo = config.mode;
   if (config.mode === 'time') modeInfo += ` ${config.timeDuration}s`;
   else if (config.mode === 'words') modeInfo += ` ${config.wordCount}`;
-  
+
   const testDetails = `${modeInfo} • theme ${config.theme}`;
-  
+
   write(ANSI.moveTo(detailsRow, layout.leftMargin) + dim + testDetails + rst);
   write(ANSI.moveTo(detailsRow + 1, layout.leftMargin) + fgHex(theme.colors.separator) + bg + '─'.repeat(Math.min(40, layout.contentWidth)) + rst);
 
-  // Secondary grid
   const statRow = detailsRow + 2;
   const statItems = [
     { label: 'raw', value: `${rawWpm}`, color: theme.colors.foreground },
@@ -371,10 +294,9 @@ export function renderSessionSummary(session: TypingSession): void {
     const stat = statItems[i];
     currentStr += dim + stat.label + ' ' + rst + fgHex(stat.color) + bg + stat.value + rst + '   ';
   }
-  
+
   write(ANSI.moveTo(statRow, layout.leftMargin) + currentStr);
 
-  // ─── SECTION C: COMPACT GRAPH ───
   if (session.wpmSamples.length > 1) {
     const sparkRow = statRow + 2;
     const sparkline = generateSparkline(session.wpmSamples, Math.min(40, layout.contentWidth));
@@ -386,12 +308,6 @@ export function renderSessionSummary(session: TypingSession): void {
   }
 }
 
-// ─── Command Overlay ─────────────────────────────────────────
-
-/**
- * Render the command palette overlay.
- * Draws a bordered box over the center of the screen.
- */
 export function renderCommandOverlay(buffer: string, message: string): void {
   const theme = getTheme();
   const layout = calculateLayout();
@@ -406,13 +322,11 @@ export function renderCommandOverlay(buffer: string, message: string): void {
   const boxLeft = Math.max(1, Math.floor((layout.termWidth - boxWidth) / 2) + 1);
   const boxTop = layout.cmdOverlayTop;
 
-  // ─── Top border ─────────────
   write(
     ANSI.moveTo(boxTop, boxLeft) +
     borderColor + '╭' + '─'.repeat(boxWidth - 2) + '╮' + rst,
   );
 
-  // ─── Title row ──────────────
   const titleText = ' command palette ';
   const titlePad = boxWidth - 2 - titleText.length;
   write(
@@ -423,13 +337,11 @@ export function renderCommandOverlay(buffer: string, message: string): void {
     borderColor + '│' + rst,
   );
 
-  // ─── Separator ──────────────
   write(
     ANSI.moveTo(boxTop + 2, boxLeft) +
     borderColor + '├' + '─'.repeat(boxWidth - 2) + '┤' + rst,
   );
 
-  // ─── Input row & Prediction ─────────
   const ALL_COMMAND_HINTS = [
     '/theme <name>', '/themes', '/mode <mode>', '/time <sec>', '/words <count>',
     '/restart', '/stats', '/caret <style>', '/difficulty <lvl>', '/quit', '/help'
@@ -437,17 +349,15 @@ export function renderCommandOverlay(buffer: string, message: string): void {
 
   let prediction = '';
   let displayHints = ALL_COMMAND_HINTS;
-  
+
   if (buffer.startsWith('/') && buffer.length > 1) {
     const search = buffer.split(' ')[0];
     const match = ALL_COMMAND_HINTS.find(c => c.startsWith(search));
-    
-    // Inline prediction (visual only)
+
     if (match && match.startsWith(buffer)) {
       prediction = match.slice(buffer.length);
     }
-    
-    // Filter the grid below
+
     const filtered = ALL_COMMAND_HINTS.filter(c => c.startsWith(search));
     if (filtered.length > 0) {
       displayHints = filtered;
@@ -455,7 +365,7 @@ export function renderCommandOverlay(buffer: string, message: string): void {
   }
 
   const cursorStr = '█';
-  // visible characters in the input row before padding
+
   const visibleLen = 1 + buffer.length + 1 + prediction.length; 
   const inputPad = boxWidth - 2 - visibleLen;
 
@@ -472,7 +382,6 @@ export function renderCommandOverlay(buffer: string, message: string): void {
     borderColor + '│' + rst,
   );
 
-  // ─── Message row ────────────
   const msgText = message ? ` ${message}` : '';
   const msgPad = boxWidth - 2 - Math.min(msgText.length, boxWidth - 2);
   write(
@@ -485,7 +394,6 @@ export function renderCommandOverlay(buffer: string, message: string): void {
     borderColor + '│' + rst,
   );
 
-  // ─── Help rows ─────────────
   const helpLines: string[] = [];
   for (let i = 0; i < 8; i += 2) {
     const c1 = displayHints[i] || '';
@@ -506,7 +414,6 @@ export function renderCommandOverlay(buffer: string, message: string): void {
     );
   }
 
-  // ─── Bottom border ──────────
   const bottomRow = boxTop + 5 + helpLines.length;
   write(
     ANSI.moveTo(bottomRow, boxLeft) +
@@ -514,13 +421,61 @@ export function renderCommandOverlay(buffer: string, message: string): void {
   );
 }
 
-/**
- * Clear the command overlay area by restoring the background.
- */
 export function clearCommandOverlay(): void {
   const layout = calculateLayout();
   const totalRows = layout.cmdOverlayHeight + 2;
   for (let i = 0; i < totalRows; i++) {
     clearRow(layout.cmdOverlayTop + i);
   }
+}
+
+export function renderAboutScreen(): void {
+  const theme = getTheme();
+  const layout = calculateLayout();
+  const bg = bgHex(theme.colors.background);
+  const fg = fgHex(theme.colors.foreground) + bg;
+  const dim = fgHex(theme.colors.dimmed) + bg;
+  const accent = ANSI.BOLD + fgHex(theme.colors.accent) + bg;
+  const rst = ANSI.RESET;
+
+  const startRow = layout.logoRow + 4;
+  
+  for (let i = 0; i < 20; i++) {
+    clearRow(startRow + i);
+  }
+
+  const col = layout.leftMargin;
+  let row = startRow;
+  
+  write(ANSI.moveTo(row++, col) + fg + "Klycky is a terminal-native typing application" + rst);
+  write(ANSI.moveTo(row++, col) + fg + "inspired by Monkeytype and built for developers." + rst);
+  row++;
+  
+  write(ANSI.moveTo(row++, col) + fg + "It exists to bring a premium, distraction-free typing" + rst);
+  write(ANSI.moveTo(row++, col) + fg + "experience directly into your terminal workflow." + rst);
+  row++;
+  
+  write(ANSI.moveTo(row++, col) + fg + "The project is evolving with more features planned." + rst);
+  write(ANSI.moveTo(row++, col) + fg + "Our goal is building a beautiful terminal typing experience." + rst);
+  row++;
+  
+  write(ANSI.moveTo(row++, col) + fg + "A lot of work is still left to be done and I'd be" + rst);
+  write(ANSI.moveTo(row++, col) + fg + "happy to accept ideas and contributions :D" + rst);
+  row++;
+  
+  write(ANSI.moveTo(row++, col) + fg + "Thanks for checking out this project!" + rst);
+  row++;
+  
+  const repoUrl = "https://github.com/Debpriyo/klycky";
+  const repoText = "Star this project on GitHub";
+  const repoLink = `\x1b]8;;${repoUrl}\x1b\\\x1b[4m${accent}${repoText}${rst}\x1b]8;;\x1b\\`;
+  write(ANSI.moveTo(row++, col) + repoLink);
+  
+  row += 3;
+  const authorUrl = "https://debpriyo.is-a.dev/";
+  const authorText = "Deb";
+  const authorLink = `\x1b]8;;${authorUrl}\x1b\\\x1b[4m${accent}${authorText}${rst}\x1b]8;;\x1b\\`;
+  
+  const footerText = dim + "Made with ❤️ by " + rst + authorLink;
+  write(ANSI.moveTo(row, col) + footerText);
 }

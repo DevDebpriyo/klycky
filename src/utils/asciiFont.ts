@@ -1,9 +1,4 @@
-/**
- * Klycky - ASCII Font
- *
- * Minimal block-style ASCII font for rendering large numbers
- * on the results screen.
- */
+
 
 const FONT_MAP: Record<string, string[]> = {
   '0': [
@@ -41,7 +36,7 @@ const FONT_MAP: Record<string, string[]> = {
     ' ╰──╮ ',
     '    │ ',
     ' ╰──╯ '
-  ], // Let's refine the shape for some of these
+  ], 
   '6': [
     ' ╭──╮ ',
     ' ├──╮ ',
@@ -92,14 +87,13 @@ const FONT_MAP: Record<string, string[]> = {
   ],
 };
 
-// Adjusted '5'
 FONT_MAP['5'] = [
   ' ╭──╮ ',
   ' ╰──╮ ',
   '    │ ',
   ' ╰──╯ '
 ];
-// Wait, for 5 the top should be left aligned
+
 FONT_MAP['5'] = [
   ' ╭──╮ ',
   ' ╰──╮ ',
@@ -113,9 +107,7 @@ FONT_MAP['5'] = [
   ' ╰──╯ '
 ];
 
-/**
- * Render a string into a multi-line array of strings using the block font.
- */
+// Renders large text
 export function renderLargeText(text: string): string[] {
   const result: string[] = ['', '', '', ''];
   for (let i = 0; i < text.length; i++) {

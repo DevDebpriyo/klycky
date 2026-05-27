@@ -1,15 +1,7 @@
-/**
- * Klycky - Metrics Calculator
- *
- * Computes typing performance metrics from session data.
- * Provides formatted metric output for display.
- */
+
 
 import { TypingSession } from '../engine/session.js';
 
-/**
- * Complete set of metrics for a finished session.
- */
 export interface SessionMetrics {
   wpm: number;
   rawWpm: number;
@@ -24,9 +16,7 @@ export interface SessionMetrics {
   wpmSamples: number[];
 }
 
-/**
- * Extract all metrics from a completed typing session.
- */
+// Computes metrics
 export function computeMetrics(session: TypingSession): SessionMetrics {
   return {
     wpm: Math.round(session.calculateWpm()),
@@ -43,16 +33,11 @@ export function computeMetrics(session: TypingSession): SessionMetrics {
   };
 }
 
-/**
- * Generate a sparkline string from WPM samples.
- * Uses Unicode block elements: ▁▂▃▄▅▆▇█
- */
 export function generateSparkline(samples: number[], maxWidth: number = 20): string {
   if (samples.length === 0) return '';
 
   const blocks = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
 
-  // Use only the most recent samples that fit the width
   const displaySamples = samples.slice(-maxWidth);
 
   const min = Math.min(...displaySamples);
@@ -68,19 +53,13 @@ export function generateSparkline(samples: number[], maxWidth: number = 20): str
     .join('');
 }
 
-/**
- * Generate an accuracy meter bar.
- * Example: █████████░ 98%
- */
+// Generates accuracy meter
 export function generateAccuracyMeter(accuracy: number, width: number = 10): string {
   const filled = Math.round((accuracy / 100) * width);
   const empty = width - filled;
   return '█'.repeat(filled) + '░'.repeat(empty) + ` ${Math.round(accuracy)}%`;
 }
 
-/**
- * Generate flow indicator based on current streak.
- */
 export function generateFlowIndicator(streak: number): string {
   if (streak >= 50) return 'flow ✦✦✦';
   if (streak >= 30) return 'flow ✦✦';

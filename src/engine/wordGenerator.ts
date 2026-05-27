@@ -1,13 +1,6 @@
-/**
- * Klycky - Word Generator
- *
- * Generates word lists for typing sessions from built-in wordlists.
- * Supports difficulty levels, punctuation, and number injection.
- */
+
 
 import { shuffle } from '../utils/helpers.js';
-
-// ─── Built-in Word Lists ────────────────────────────────────
 
 const EASY_WORDS = [
   'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'it',
@@ -61,13 +54,10 @@ export interface WordGenOptions {
   numbers: boolean;
 }
 
-/**
- * Generate a list of random words for a typing session.
- */
+// Generates words
 export function generateWords(options: WordGenOptions): string[] {
   const { count, difficulty, punctuation, numbers } = options;
 
-  // Select word pool based on difficulty
   let pool: string[];
   switch (difficulty) {
     case 'easy':
@@ -80,17 +70,15 @@ export function generateWords(options: WordGenOptions): string[] {
       pool = [...NORMAL_WORDS];
   }
 
-  // Generate words by random selection
   const words: string[] = [];
   for (let i = 0; i < count; i++) {
     const idx = Math.floor(Math.random() * pool.length);
     let word = pool[idx];
 
-    // Inject punctuation randomly (~15% of words)
     if (punctuation && Math.random() < 0.15) {
       const mark = PUNCTUATION_MARKS[Math.floor(Math.random() * PUNCTUATION_MARKS.length)];
       if (mark === '-') {
-        // Hyphenated compound word
+
         const nextIdx = Math.floor(Math.random() * pool.length);
         word = word + '-' + pool[nextIdx];
       } else if (mark === "'") {
@@ -100,12 +88,10 @@ export function generateWords(options: WordGenOptions): string[] {
       }
     }
 
-    // Inject numbers randomly (~10% of words)
     if (numbers && Math.random() < 0.1) {
       word = NUMBER_WORDS[Math.floor(Math.random() * NUMBER_WORDS.length)];
     }
 
-    // Capitalize first word of "sentence" (~10% after punctuation)
     if (punctuation && i > 0 && Math.random() < 0.1) {
       word = word.charAt(0).toUpperCase() + word.slice(1);
     }
@@ -116,17 +102,14 @@ export function generateWords(options: WordGenOptions): string[] {
   return words;
 }
 
-/**
- * Wrap words into lines that fit a given terminal width.
- * Returns an array of lines, each being an array of words.
- */
+// Wraps words
 export function wrapWords(words: string[], maxWidth: number): string[][] {
   const lines: string[][] = [];
   let currentLine: string[] = [];
   let currentWidth = 0;
 
   for (const word of words) {
-    const wordWidth = word.length + (currentLine.length > 0 ? 1 : 0); // +1 for space
+    const wordWidth = word.length + (currentLine.length > 0 ? 1 : 0); 
     if (currentWidth + wordWidth > maxWidth && currentLine.length > 0) {
       lines.push(currentLine);
       currentLine = [word];

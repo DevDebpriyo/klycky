@@ -1,8 +1,4 @@
-/**
- * Klycky - History Manager
- *
- * Manages session history persistence and aggregate statistics.
- */
+
 
 import {
   loadHistory,
@@ -14,11 +10,9 @@ import {
 } from '../config/configManager.js';
 import { SessionMetrics } from './metrics.js';
 
-/**
- * Record a completed session to history and update aggregate stats.
- */
+// Records session
 export function recordSession(metrics: SessionMetrics, mode: string): void {
-  // Save individual session record
+
   const record: SessionRecord = {
     timestamp: Date.now(),
     mode,
@@ -32,7 +26,6 @@ export function recordSession(metrics: SessionMetrics, mode: string): void {
   };
   saveSessionToHistory(record);
 
-  // Update aggregate stats
   const stats = loadStats();
   stats.totalSessions++;
   stats.totalTime += metrics.duration;
@@ -41,7 +34,6 @@ export function recordSession(metrics: SessionMetrics, mode: string): void {
     stats.bestWpm = metrics.wpm;
   }
 
-  // Rolling average
   const prevTotal = stats.averageWpm * (stats.totalSessions - 1);
   stats.averageWpm = Math.round((prevTotal + metrics.wpm) / stats.totalSessions);
 
@@ -52,25 +44,17 @@ export function recordSession(metrics: SessionMetrics, mode: string): void {
   saveStats(stats);
 }
 
-/**
- * Get recent session history.
- */
 export function getRecentHistory(count: number = 10): SessionRecord[] {
   const history = loadHistory();
   return history.slice(-count);
 }
 
-/**
- * Get the user's best WPM from history.
- */
+// Gets best wpm
 export function getBestWpm(): number {
   const stats = loadStats();
   return stats.bestWpm;
 }
 
-/**
- * Get aggregate statistics.
- */
 export function getAggregateStats(): AggregateStats {
   return loadStats();
 }

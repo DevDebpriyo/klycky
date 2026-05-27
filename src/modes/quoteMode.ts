@@ -1,12 +1,7 @@
-/**
- * Klycky - Quote Mode
- *
- * Curated readable quotes with elegant wrapping.
- */
+
 
 import { TypingSession } from '../engine/session.js';
 
-/** Built-in quote collection */
 const QUOTES: string[] = [
   "The only way to do great work is to love what you do.",
   "In the middle of difficulty lies opportunity.",
@@ -40,18 +35,14 @@ const QUOTES: string[] = [
   "The computer was born to solve problems that did not exist before.",
 ];
 
-/**
- * Create a new quote mode session.
- */
+// Creates quote session
 export function createQuoteSession(): TypingSession {
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
   const words = quote.split(/\s+/);
   return new TypingSession(words, 'quote', 0);
 }
 
-/**
- * Get a random quote string.
- */
+// Gets random quote
 export function getRandomQuote(): string {
   return QUOTES[Math.floor(Math.random() * QUOTES.length)];
 }

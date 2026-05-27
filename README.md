@@ -8,6 +8,9 @@
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![npm](https://img.shields.io/npm/v/klycky)
 ![downloads](https://img.shields.io/npm/dm/klycky)
+![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink)
+![Contribute](https://img.shields.io/badge/PRs_Welcome-brightgreen.svg)
+![Issues](https://img.shields.io/github/issues/DevDebpriyo/klycky)
 
 ## ✨ Features
 
@@ -15,7 +18,7 @@
 - **Zero Flickering** — Buffered frame rendering with region-based updates
 - **Multiple Typing Modes** — Time (15s/30s/60s), Word Count (25/50/100), Quotes, Custom Text
 - **Live Performance Metrics** — WPM sparkline, accuracy meter, flow indicators
-- **6 Built-in Themes** — Catppuccin, Tokyo Night, Nord, Gruvbox, Monokai, GitHub Dark
+- **18 Built-in Themes** — Catppuccin, Dracula, Rosé Pine, Solarized, and more
 - **Command Palette** — Floating overlay with slash commands (like VSCode)
 - **Fully Offline** — No accounts, no internet, zero runtime dependencies
 - **Cross-Platform** — Works on Windows, macOS, and Linux
@@ -97,11 +100,22 @@ Press `/` while idle to open the command palette overlay:
 ## 🎨 Themes
 
 - **Catppuccin Mocha** — Warm pastel colors on dark background
+- **Catppuccin Frappé** — Muted pastels on a mid-tone base
 - **Tokyo Night** — Cool blue and purple tones
 - **Nord** — Arctic-inspired color palette
 - **Gruvbox Dark** — Retro warm color scheme
 - **Monokai Pro** — Classic vibrant syntax colors
 - **GitHub Dark** — Clean, modern dark theme
+- **Dracula** — Bold purples and vivid greens
+- **Serika Dark** — Monkeytype-inspired dark gold accent
+- **Serika Light** — Monkeytype-inspired light variant
+- **Solarized Dark** — Ethan Schoonover's precision palette
+- **Rosé Pine** — Soho vibes with muted rose tones
+- **Carbon** — IBM Carbon design system colors
+- **Olive** — Earthy greens and natural tones
+- **Bouquet** — Soft florals and lavender hues
+- **Café** — Warm coffee and cream palette
+- **Cyberspace** — Neon greens and cyberpunk glow
 
 Switch themes instantly with `/theme <name>`.
 
@@ -162,6 +176,14 @@ npm start
 # Watch mode (auto-rebuild on changes)
 npm run dev
 ```
+
+## 🐭 Mouse Clicks
+
+Klycky listens for raw ANSI mouse packets from your terminal. If clicks do not register:
+
+- Ensure your terminal supports mouse tracking and isn't intercepting clicks.
+- In VSCode, try "Terminal: Enable Mouse Reporting" and disable extensions that capture clicks.
+- For debugging, run with `KLYCKY_DEBUG_MOUSE=1` to log raw mouse packets.
 
 ## 📋 Requirements
 

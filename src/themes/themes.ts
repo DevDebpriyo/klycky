@@ -1,13 +1,6 @@
-/**
- * Klycky - Theme Definitions
- *
- * All built-in themes following the KlyckyTheme interface.
- * Ported from popular color schemes: Catppuccin, Tokyo Night, Nord, Gruvbox, Monokai, GitHub Dark.
- */
 
 import { KlyckyTheme } from './themeTypes.js';
 
-// ─── Catppuccin Mocha ────────────────────────────────────────
 export const catppuccin: KlyckyTheme = {
   name: 'catppuccin',
   displayName: 'Catppuccin Mocha',
@@ -32,7 +25,30 @@ export const catppuccin: KlyckyTheme = {
   },
 };
 
-// ─── Tokyo Night ─────────────────────────────────────────────
+export const catppuccinFrappe: KlyckyTheme = {
+  name: 'catppuccin-frappe',
+  displayName: 'Catppuccin Frappé',
+  variant: 'dark',
+  colors: {
+    background: '#303446',
+    foreground: '#c6d0f5',
+    dimmed: '#626880',
+    active: '#ca9ee6',
+    correct: '#a6d189',
+    error: '#e78284',
+    extra: '#f2d5cf',
+    caret: '#f2d5cf',
+    accent: '#ca9ee6',
+    accentSecondary: '#8caaee',
+    separator: '#414559',
+    statusBg: '#292c3c',
+    statusFg: '#a5adce',
+    success: '#a6d189',
+    warning: '#e5c890',
+    info: '#85c1dc',
+  },
+};
+
 export const tokyoNight: KlyckyTheme = {
   name: 'tokyo-night',
   displayName: 'Tokyo Night',
@@ -57,7 +73,6 @@ export const tokyoNight: KlyckyTheme = {
   },
 };
 
-// ─── Nord ────────────────────────────────────────────────────
 export const nord: KlyckyTheme = {
   name: 'nord',
   displayName: 'Nord',
@@ -82,7 +97,6 @@ export const nord: KlyckyTheme = {
   },
 };
 
-// ─── Gruvbox Dark ────────────────────────────────────────────
 export const gruvbox: KlyckyTheme = {
   name: 'gruvbox',
   displayName: 'Gruvbox Dark',
@@ -107,7 +121,6 @@ export const gruvbox: KlyckyTheme = {
   },
 };
 
-// ─── Monokai Pro ─────────────────────────────────────────────
 export const monokai: KlyckyTheme = {
   name: 'monokai',
   displayName: 'Monokai Pro',
@@ -132,7 +145,6 @@ export const monokai: KlyckyTheme = {
   },
 };
 
-// ─── GitHub Dark ─────────────────────────────────────────────
 export const githubDark: KlyckyTheme = {
   name: 'github-dark',
   displayName: 'GitHub Dark',
@@ -157,21 +169,267 @@ export const githubDark: KlyckyTheme = {
   },
 };
 
-/**
- * Registry of all built-in themes.
- */
+export const dracula: KlyckyTheme = {
+  name: 'dracula',
+  displayName: 'Dracula',
+  variant: 'dark',
+  colors: {
+    background: '#282a36',
+    foreground: '#f8f8f2',
+    dimmed: '#6272a4',
+    active: '#bd93f9',
+    correct: '#50fa7b',
+    error: '#ff5555',
+    extra: '#ffb86c',
+    caret: '#f8f8f2',
+    accent: '#ff79c6',
+    accentSecondary: '#8be9fd',
+    separator: '#44475a',
+    statusBg: '#21222c',
+    statusFg: '#bfbfbf',
+    success: '#50fa7b',
+    warning: '#f1fa8c',
+    info: '#8be9fd',
+  },
+};
+
+export const serikaDark: KlyckyTheme = {
+  name: 'serika-dark',
+  displayName: 'Serika Dark',
+  variant: 'dark',
+  colors: {
+    background: '#323437',
+    foreground: '#d1d0c5',
+    dimmed: '#646669',
+    active: '#e2b714',
+    correct: '#d1d0c5',
+    error: '#ca4754',
+    extra: '#7e2a33',
+    caret: '#e2b714',
+    accent: '#e2b714',
+    accentSecondary: '#d1d0c5',
+    separator: '#2c2e31',
+    statusBg: '#2c2e31',
+    statusFg: '#646669',
+    success: '#98c379',
+    warning: '#e2b714',
+    info: '#4aa5c9',
+  },
+};
+
+export const serikaLight: KlyckyTheme = {
+  name: 'serika-light',
+  displayName: 'Serika Light',
+  variant: 'light',
+  colors: {
+    background: '#e1e1e3',
+    foreground: '#323437',
+    dimmed: '#aaaeb3',
+    active: '#e2b714',
+    correct: '#323437',
+    error: '#da3333',
+    extra: '#8b2c2c',
+    caret: '#e2b714',
+    accent: '#e2b714',
+    accentSecondary: '#323437',
+    separator: '#d1d1d3',
+    statusBg: '#d1d1d3',
+    statusFg: '#aaaeb3',
+    success: '#55a35a',
+    warning: '#e2b714',
+    info: '#4a8fa8',
+  },
+};
+
+export const solarizedDark: KlyckyTheme = {
+  name: 'solarized-dark',
+  displayName: 'Solarized Dark',
+  variant: 'dark',
+  colors: {
+    background: '#002b36',
+    foreground: '#839496',
+    dimmed: '#586e75',
+    active: '#b58900',
+    correct: '#859900',
+    error: '#dc322f',
+    extra: '#cb4b16',
+    caret: '#fdf6e3',
+    accent: '#268bd2',
+    accentSecondary: '#2aa198',
+    separator: '#073642',
+    statusBg: '#073642',
+    statusFg: '#93a1a1',
+    success: '#859900',
+    warning: '#b58900',
+    info: '#268bd2',
+  },
+};
+
+export const rosePine: KlyckyTheme = {
+  name: 'rose-pine',
+  displayName: 'Rosé Pine',
+  variant: 'dark',
+  colors: {
+    background: '#191724',
+    foreground: '#e0def4',
+    dimmed: '#6e6a86',
+    active: '#c4a7e7',
+    correct: '#9ccfd8',
+    error: '#eb6f92',
+    extra: '#f6c177',
+    caret: '#e0def4',
+    accent: '#ebbcba',
+    accentSecondary: '#c4a7e7',
+    separator: '#26233a',
+    statusBg: '#1f1d2e',
+    statusFg: '#908caa',
+    success: '#9ccfd8',
+    warning: '#f6c177',
+    info: '#31748f',
+  },
+};
+
+export const carbon: KlyckyTheme = {
+  name: 'carbon',
+  displayName: 'Carbon',
+  variant: 'dark',
+  colors: {
+    background: '#161616',
+    foreground: '#f4f4f4',
+    dimmed: '#525252',
+    active: '#0f62fe',
+    correct: '#42be65',
+    error: '#da1e28',
+    extra: '#ff832b',
+    caret: '#ffffff',
+    accent: '#0f62fe',
+    accentSecondary: '#a56eff',
+    separator: '#262626',
+    statusBg: '#262626',
+    statusFg: '#8d8d8d',
+    success: '#42be65',
+    warning: '#f1c21b',
+    info: '#4589ff',
+  },
+};
+
+export const olive: KlyckyTheme = {
+  name: 'olive',
+  displayName: 'Olive',
+  variant: 'dark',
+  colors: {
+    background: '#1c2019',
+    foreground: '#c5c9a8',
+    dimmed: '#5c6348',
+    active: '#92a65e',
+    correct: '#a3b86c',
+    error: '#c75f5f',
+    extra: '#d4a56a',
+    caret: '#e0e4c8',
+    accent: '#92a65e',
+    accentSecondary: '#6b8e5e',
+    separator: '#2a2e24',
+    statusBg: '#22261e',
+    statusFg: '#8a8e72',
+    success: '#a3b86c',
+    warning: '#d4c56a',
+    info: '#6e9e8c',
+  },
+};
+
+export const bouquet: KlyckyTheme = {
+  name: 'bouquet',
+  displayName: 'Bouquet',
+  variant: 'dark',
+  colors: {
+    background: '#1a1221',
+    foreground: '#e8d5f0',
+    dimmed: '#5e4a6b',
+    active: '#c688e0',
+    correct: '#d4a8e8',
+    error: '#e05a7a',
+    extra: '#e8a0c0',
+    caret: '#f0d0f8',
+    accent: '#c688e0',
+    accentSecondary: '#a868c8',
+    separator: '#2a1e32',
+    statusBg: '#1e1628',
+    statusFg: '#8a6e9e',
+    success: '#b898d8',
+    warning: '#e0c080',
+    info: '#88a0d8',
+  },
+};
+
+export const cafe: KlyckyTheme = {
+  name: 'cafe',
+  displayName: 'Café',
+  variant: 'dark',
+  colors: {
+    background: '#1e1a17',
+    foreground: '#d4c4b0',
+    dimmed: '#6b5d50',
+    active: '#c8a882',
+    correct: '#a8b882',
+    error: '#c45a4a',
+    extra: '#d49858',
+    caret: '#e8d8c0',
+    accent: '#c8a882',
+    accentSecondary: '#a08060',
+    separator: '#2e2822',
+    statusBg: '#252018',
+    statusFg: '#8a7e6e',
+    success: '#a8b882',
+    warning: '#d8c070',
+    info: '#82a8b0',
+  },
+};
+
+export const cyberspace: KlyckyTheme = {
+  name: 'cyberspace',
+  displayName: 'Cyberspace',
+  variant: 'dark',
+  colors: {
+    background: '#0a0e14',
+    foreground: '#00e8c6',
+    dimmed: '#1a3a40',
+    active: '#00ffaa',
+    correct: '#00e8c6',
+    error: '#ff2a6d',
+    extra: '#d400ff',
+    caret: '#00ffaa',
+    accent: '#05d9e8',
+    accentSecondary: '#ff6ac1',
+    separator: '#112025',
+    statusBg: '#060a0f',
+    statusFg: '#2a6e6e',
+    success: '#00e8c6',
+    warning: '#f0e800',
+    info: '#05d9e8',
+  },
+};
+
 export const THEMES: Record<string, KlyckyTheme> = {
   catppuccin,
+  'catppuccin-mocha': catppuccin,
+  'catppuccin-frappe': catppuccinFrappe,
   'tokyo-night': tokyoNight,
   nord,
   gruvbox,
   monokai,
   'github-dark': githubDark,
+  dracula,
+  'serika-dark': serikaDark,
+  'serika-light': serikaLight,
+  'solarized-dark': solarizedDark,
+  'rose-pine': rosePine,
+  carbon,
+  olive,
+  bouquet,
+  cafe,
+  cyberspace,
 };
 
-/**
- * Get sorted list of all available theme names.
- */
 export function getThemeNames(): string[] {
   return Object.keys(THEMES).sort();
 }

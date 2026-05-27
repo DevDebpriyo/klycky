@@ -1,9 +1,4 @@
-/**
- * Klycky - Command Parser
- *
- * Lightweight keyboard-first command system.
- * Handles /command syntax for mode switching, theme changes, settings, etc.
- */
+
 
 import { updateConfig, getConfig, resetConfig, KlyckyConfig } from '../config/index.js';
 import { setTheme, getThemeNames } from '../themes/index.js';
@@ -11,23 +6,20 @@ import { getAggregateStats, getRecentHistory } from '../stats/index.js';
 import { formatDuration } from '../utils/helpers.js';
 
 export interface CommandResult {
-  /** Whether the command was recognized and executed */
+
   success: boolean;
-  /** Message to display to the user */
+
   message: string;
-  /** Whether to restart the current session */
+
   restart: boolean;
-  /** Whether to quit the application */
+
   quit: boolean;
 }
 
-/**
- * Parse and execute a command string (e.g., "/theme nord").
- */
+// Executes command
 export function executeCommand(input: string): CommandResult {
   const trimmed = input.trim();
 
-  // Must start with /
   if (!trimmed.startsWith('/')) {
     return { success: false, message: 'Commands start with /', restart: false, quit: false };
   }
@@ -95,6 +87,7 @@ export function executeCommand(input: string): CommandResult {
   }
 }
 
+// Handles theme
 function handleTheme(args: string[]): CommandResult {
   if (args.length === 0) {
     const config = getConfig();
