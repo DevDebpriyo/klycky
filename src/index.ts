@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import packageJson from '../package.json' with { type: 'json' };
 import { loadConfig, getConfig, updateConfig } from './config/index.js';
 import { setTheme } from './themes/index.js';
 import { TypingSession } from './engine/session.js';
@@ -63,7 +64,7 @@ if (args.includes('--help') || args.includes('-h')) {
 }
 
 if (args.includes('--version') || args.includes('-v')) {
-  console.log('klycky v1.0.0');
+  console.log(`klycky v${packageJson.version}`);
   process.exit(0);
 }
 
@@ -160,7 +161,7 @@ async function main(): Promise<void> {
 
       beginFrame();
       const cfg = getConfig();
-      renderModeRow(state.session, cfg); 
+      renderModeRow(state.session, cfg);
       endFrame();
     }
   }, TIMER_TICK_MS);
@@ -289,7 +290,7 @@ function handleResultsInput(state: AppState, event: KeyEvent): void {
 
   const elapsed = Date.now() - state.resultsEnteredAt;
   if (elapsed < RESULTS_DEBOUNCE_MS) {
-    return; 
+    return;
   }
 
   if (event.name === 'tab') {
@@ -366,12 +367,12 @@ function handleCommandInput(state: AppState, event: KeyEvent): void {
 
 function transitionToAbout(state: AppState): void {
   state.mode = AppMode.About;
-  
+
   if (state.tickTimer) {
     clearInterval(state.tickTimer);
     state.tickTimer = null;
   }
-  
+
   fillBackground();
   beginFrame();
   renderLogo();
