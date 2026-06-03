@@ -2,6 +2,7 @@
 
 import { getTheme } from '../themes/themeLoader.js';
 import { fgHex, bgHex } from '../themes/themeTypes.js';
+import { getThemeNames } from '../themes/themes.js';
 import { ANSI } from '../utils/ansi.js';
 import { calculateLayout } from './layout.js';
 import { write, clearRow } from './screen.js';
@@ -202,8 +203,13 @@ export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command' | '
       break;
   }
 
+  const themeLabel = '󰏘 ' + theme.name;
+  const themeStyled = fgHex(theme.colors.accent) + bg + '󰏘 ' + rst + dim + theme.name + rst;
+  const themeCol = layout.leftMargin + layout.contentWidth - themeLabel.length;
+
   clearRow(layout.footerRow);
   write(ANSI.moveTo(layout.footerRow, layout.leftMargin) + content);
+  write(ANSI.moveTo(layout.footerRow, themeCol) + themeStyled);
 }
 
 export function renderMessage(message: string): void {
@@ -478,4 +484,109 @@ export function renderAboutScreen(): void {
   
   const footerText = dim + "Made with ❤️ by " + rst + authorLink;
   write(ANSI.moveTo(row, col) + footerText);
+}
+
+export function renderThemePicker(selectedIndex: number): void {
+  const theme = getTheme();
+  const layout = calculateLayout();
+  const bg = bgHex(theme.colors.statusBg);
+  const borderColor = fgHex(theme.colors.separator) + bg;
+  const rst = ANSI.RESET;
+  const accent = fgHex(theme.colors.accent) + bg;
+  const fg = fgHex(theme.colors.foreground) + bg;
+  const dim = fgHex(theme.colors.dimmed) + bg;
+
+  const themes = getThemeNames();
+  const maxVisible = Math.min(12, layout.termHeight - 6);
+  const boxWidth = Math.min(40, layout.contentWidth);
+  const boxLeft = Math.max(1, Math.floor((layout.termWidth - boxWidth) / 2) + 1);
+
+  // title + separator + items + bottom = 3 + items + 1
+  const boxHeight = 3 + maxVisible + 1;
+  const boxTop = Math.max(2, Math.floor((layout.termHeight - boxHeight) / 2));
+
+  // scroll window around selectedIndex
+  let scrollTop = 0;
+  if (themes.length > maxVisible) {
+    scrollTop = Math.max(0, Math.min(selectedIndex - Math.floor(maxVisible / 2), themes.length - maxVisible));
+  }
+
+  write(
+    ANSI.moveTo(boxTop, boxLeft) +
+    borderColor + '╭' + '─'.repeat(boxWidth - 2) + '╮' + rst,
+  );
+
+  const titleText = ' themes ';
+  const titlePad = boxWidth - 2 - titleText.length;
+  write(
+    ANSI.moveTo(boxTop + 1, boxLeft) +
+    borderColor + '│' + rst +
+    accent + titleText + rst +
+    bg + ' '.repeat(Math.max(0, titlePad)) + rst +
+    borderColor + '│' + rst,
+  );
+
+  write(
+    ANSI.moveTo(boxTop + 2, boxLeft) +
+    borderColor + '├' + '─'.repeat(boxWidth - 2) + '┤' + rst,
+  );
+
+  for (let i = 0; i < maxVisible; i++) {
+    const themeIdx = scrollTop + i;
+    if (themeIdx >= themes.length) {
+      // empty row
+      write(
+        ANSI.moveTo(boxTop + 3 + i, boxLeft) +
+        borderColor + '│' + rst +
+        bg + ' '.repeat(boxWidth - 2) + rst +
+        borderColor + '│' + rst,
+      );
+      continue;
+    }
+
+    const name = themes[themeIdx];
+    const isSelected = themeIdx === selectedIndex;
+    const indicator = isSelected ? '▸ ' : '  ';
+    const label = indicator + name;
+    const pad = boxWidth - 2 - label.length;
+
+    const style = isSelected
+      ? ANSI.BOLD + fgHex(theme.colors.accent) + bg
+      : dim;
+
+    write(
+      ANSI.moveTo(boxTop + 3 + i, boxLeft) +
+      borderColor + '│' + rst +
+      style + label + rst +
+      bg + ' '.repeat(Math.max(0, pad)) + rst +
+      borderColor + '│' + rst,
+    );
+  }
+
+  const bottomRow = boxTop + 3 + maxVisible;
+  write(
+    ANSI.moveTo(bottomRow, boxLeft) +
+    borderColor + '╰' + '─'.repeat(boxWidth - 2) + '╯' + rst,
+  );
+
+  // hint below the box
+  const hintRow = bottomRow + 1;
+  const hintText = '↑↓ navigate  enter select  esc cancel';
+  const hintCol = Math.max(1, Math.floor((layout.termWidth - hintText.length) / 2) + 1);
+  clearRow(hintRow);
+  write(
+    ANSI.moveTo(hintRow, hintCol) +
+    fgHex(theme.colors.dimmed) + bgHex(theme.colors.background) + hintText + rst,
+  );
+}
+
+export function clearThemePicker(): void {
+  const layout = calculateLayout();
+  const maxVisible = Math.min(12, layout.termHeight - 6);
+  const boxHeight = 3 + maxVisible + 1;
+  const boxTop = Math.max(2, Math.floor((layout.termHeight - boxHeight) / 2));
+  // +2 for the hint row and a bit of margin
+  for (let i = 0; i < boxHeight + 2; i++) {
+    clearRow(boxTop + i);
+  }
 }

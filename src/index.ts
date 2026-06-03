@@ -2,7 +2,7 @@
 
 import packageJson from '../package.json' with { type: 'json' };
 import { loadConfig, getConfig, updateConfig } from './config/index.js';
-import { setTheme } from './themes/index.js';
+import { setTheme, getThemeNames } from './themes/index.js';
 import { TypingSession } from './engine/session.js';
 import { enableRawMode, onKeypress, KeyEvent } from './engine/inputHandler.js';
 import {
@@ -14,7 +14,7 @@ import {
   renderLogo, renderModeRow, renderSeparator, renderLiveStats,
   renderFooter, renderMessage, clearMessage, renderSessionSummary,
   renderCommandOverlay, clearCommandOverlay, resetTimerCache,
-  renderAboutScreen,
+  renderAboutScreen, renderThemePicker, clearThemePicker,
 } from './renderer/statusBar.js';
 import { calculateLayout } from './renderer/layout.js';
 import { createTimeSession } from './modes/timeMode.js';
@@ -74,6 +74,7 @@ const enum AppMode {
   Results = 2,
   Command = 3,
   About = 4,
+  ThemePicker = 5,
 }
 
 interface AppState {
@@ -87,6 +88,9 @@ interface AppState {
   tickTimer: ReturnType<typeof setInterval> | null;
 
   resultsEnteredAt: number;
+
+  themePickerIndex: number;
+  themePickerOriginal: string;
 
   running: boolean;
 }
@@ -127,6 +131,8 @@ async function main(): Promise<void> {
     commandMessageTimeout: null,
     tickTimer: null,
     resultsEnteredAt: 0,
+    themePickerIndex: 0,
+    themePickerOriginal: '',
     running: true,
   };
 
@@ -203,6 +209,9 @@ async function main(): Promise<void> {
         break;
       case AppMode.Command:
         handleCommandInput(state, event);
+        break;
+      case AppMode.ThemePicker:
+        handleThemePickerInput(state, event);
         break;
     }
   });
@@ -328,6 +337,11 @@ function handleCommandInput(state: AppState, event: KeyEvent): void {
       return;
     }
 
+    if (result.openThemePicker) {
+      openThemePickerPalette(state);
+      return;
+    }
+
     state.commandBuffer = '';
     state.commandMessage = '';
     state.mode = AppMode.Idle;
@@ -427,6 +441,73 @@ function closeCommandPalette(state: AppState): void {
 
   fillBackground();
   fullRender(state);
+}
+
+function openThemePickerPalette(state: AppState): void {
+  const config = getConfig();
+  state.themePickerOriginal = config.theme;
+
+  const themes = getThemeNames();
+  state.themePickerIndex = Math.max(0, themes.indexOf(config.theme));
+  state.mode = AppMode.ThemePicker;
+  state.commandBuffer = '';
+  state.commandMessage = '';
+
+  fillBackground();
+  beginFrame();
+  renderLogo();
+  renderThemePicker(state.themePickerIndex);
+  renderFooter('idle');
+  endFrame();
+}
+
+function handleThemePickerInput(state: AppState, event: KeyEvent): void {
+  const themes = getThemeNames();
+
+  if (event.name === 'escape') {
+    // revert to the original theme
+    setTheme(state.themePickerOriginal);
+    updateConfig({ theme: state.themePickerOriginal });
+    state.mode = AppMode.Idle;
+    state.session = createSession(getConfig());
+    resetTimerCache();
+    fillBackground();
+    fullRender(state);
+    return;
+  }
+
+  if (event.name === 'enter') {
+    // confirm current selection
+    const selectedTheme = themes[state.themePickerIndex];
+    updateConfig({ theme: selectedTheme });
+    state.mode = AppMode.Idle;
+    state.session = createSession(getConfig());
+    resetTimerCache();
+    fillBackground();
+    fullRender(state);
+    showMessage(state, `Theme set to ${selectedTheme}`);
+    return;
+  }
+
+  if (event.name === 'up' || event.name === 'down') {
+    if (event.name === 'up') {
+      state.themePickerIndex = (state.themePickerIndex - 1 + themes.length) % themes.length;
+    } else {
+      state.themePickerIndex = (state.themePickerIndex + 1) % themes.length;
+    }
+
+    // live preview
+    const previewTheme = themes[state.themePickerIndex];
+    setTheme(previewTheme);
+
+    fillBackground();
+    beginFrame();
+    renderLogo();
+    renderThemePicker(state.themePickerIndex);
+    renderFooter('idle');
+    endFrame();
+    return;
+  }
 }
 
 function gracefulQuit(state: AppState): void {

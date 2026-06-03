@@ -14,6 +14,8 @@ export interface CommandResult {
   restart: boolean;
 
   quit: boolean;
+
+  openThemePicker?: boolean;
 }
 
 // Executes command
@@ -119,12 +121,12 @@ function handleTheme(args: string[]): CommandResult {
 }
 
 function handleThemeList(): CommandResult {
-  const themes = getThemeNames();
   return {
     success: true,
-    message: `Available themes: ${themes.join(', ')}`,
+    message: '',
     restart: false,
     quit: false,
+    openThemePicker: true,
   };
 }
 

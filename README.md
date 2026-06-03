@@ -177,14 +177,6 @@ npm start
 npm run dev
 ```
 
-## 🐭 Mouse Clicks
-
-Klycky listens for raw ANSI mouse packets from your terminal. If clicks do not register:
-
-- Ensure your terminal supports mouse tracking and isn't intercepting clicks.
-- In VSCode, try "Terminal: Enable Mouse Reporting" and disable extensions that capture clicks.
-- For debugging, run with `KLYCKY_DEBUG_MOUSE=1` to log raw mouse packets.
-
 ## 📋 Requirements
 
 - Node.js >= 18
