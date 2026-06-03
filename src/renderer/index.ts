@@ -9,5 +9,5 @@ export {
   renderLogo, renderModeRow, renderSeparator, renderLiveStats,
   renderFooter, renderMessage, clearMessage, renderSessionSummary,
   renderCommandOverlay, clearCommandOverlay, resetTimerCache,
-  renderAboutScreen, renderThemePicker, clearThemePicker,
+  renderThemePicker, clearThemePicker,
 } from './statusBar.js';

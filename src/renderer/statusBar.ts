@@ -30,9 +30,7 @@ export function renderLogo(): void {
     ANSI.RESET;
 
   clearRow(layout.logoRow);
-  const infoButton = ANSI.BOLD + fgHex(theme.colors.dimmed) + bg + ' ⓘ ' + ANSI.RESET;
-  const infoCol = layout.leftMargin + layout.contentWidth - 3;
-  write(ANSI.moveTo(layout.logoRow, layout.leftMargin) + logo + ANSI.moveTo(layout.logoRow, infoCol) + infoButton);
+  write(ANSI.moveTo(layout.logoRow, layout.leftMargin) + logo);
 }
 
 let lastTimerText = '';
@@ -162,7 +160,7 @@ export function renderLiveStats(session: TypingSession, config: KlyckyConfig): v
   write(ANSI.moveTo(layout.statsRow, layout.leftMargin) + statsLine);
 }
 
-export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command' | 'about'): void {
+export function renderFooter(mode: 'idle' | 'typing' | 'results' | 'command'): void {
   const theme = getTheme();
   const layout = calculateLayout();
   const bg = bgHex(theme.colors.background);
@@ -435,56 +433,7 @@ export function clearCommandOverlay(): void {
   }
 }
 
-export function renderAboutScreen(): void {
-  const theme = getTheme();
-  const layout = calculateLayout();
-  const bg = bgHex(theme.colors.background);
-  const fg = fgHex(theme.colors.foreground) + bg;
-  const dim = fgHex(theme.colors.dimmed) + bg;
-  const accent = ANSI.BOLD + fgHex(theme.colors.accent) + bg;
-  const rst = ANSI.RESET;
 
-  const startRow = layout.logoRow + 4;
-  
-  for (let i = 0; i < 20; i++) {
-    clearRow(startRow + i);
-  }
-
-  const col = layout.leftMargin;
-  let row = startRow;
-  
-  write(ANSI.moveTo(row++, col) + fg + "Klycky is a terminal-native typing application" + rst);
-  write(ANSI.moveTo(row++, col) + fg + "inspired by Monkeytype and built for developers." + rst);
-  row++;
-  
-  write(ANSI.moveTo(row++, col) + fg + "It exists to bring a premium, distraction-free typing" + rst);
-  write(ANSI.moveTo(row++, col) + fg + "experience directly into your terminal workflow." + rst);
-  row++;
-  
-  write(ANSI.moveTo(row++, col) + fg + "The project is evolving with more features planned." + rst);
-  write(ANSI.moveTo(row++, col) + fg + "Our goal is building a beautiful terminal typing experience." + rst);
-  row++;
-  
-  write(ANSI.moveTo(row++, col) + fg + "A lot of work is still left to be done and I'd be" + rst);
-  write(ANSI.moveTo(row++, col) + fg + "happy to accept ideas and contributions :D" + rst);
-  row++;
-  
-  write(ANSI.moveTo(row++, col) + fg + "Thanks for checking out this project!" + rst);
-  row++;
-  
-  const repoUrl = "https://github.com/Debpriyo/klycky";
-  const repoText = "Star this project on GitHub";
-  const repoLink = `\x1b]8;;${repoUrl}\x1b\\\x1b[4m${accent}${repoText}${rst}\x1b]8;;\x1b\\`;
-  write(ANSI.moveTo(row++, col) + repoLink);
-  
-  row += 3;
-  const authorUrl = "https://debpriyo.is-a.dev/";
-  const authorText = "Deb";
-  const authorLink = `\x1b]8;;${authorUrl}\x1b\\\x1b[4m${accent}${authorText}${rst}\x1b]8;;\x1b\\`;
-  
-  const footerText = dim + "Made with ❤️ by " + rst + authorLink;
-  write(ANSI.moveTo(row, col) + footerText);
-}
 
 export function renderThemePicker(selectedIndex: number): void {
   const theme = getTheme();

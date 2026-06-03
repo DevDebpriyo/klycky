@@ -14,7 +14,7 @@ import {
   renderLogo, renderModeRow, renderSeparator, renderLiveStats,
   renderFooter, renderMessage, clearMessage, renderSessionSummary,
   renderCommandOverlay, clearCommandOverlay, resetTimerCache,
-  renderAboutScreen, renderThemePicker, clearThemePicker,
+  renderThemePicker, clearThemePicker,
 } from './renderer/statusBar.js';
 import { calculateLayout } from './renderer/layout.js';
 import { createTimeSession } from './modes/timeMode.js';
@@ -73,7 +73,6 @@ const enum AppMode {
   Typing = 1,
   Results = 2,
   Command = 3,
-  About = 4,
   ThemePicker = 5,
 }
 
@@ -175,20 +174,7 @@ async function main(): Promise<void> {
   onKeypress((event: KeyEvent) => {
     if (!state.running) return;
 
-    if (event.mouse && event.mType === 'press') {
-      const layout = calculateLayout();
-      const infoColStart = layout.leftMargin + layout.contentWidth - 4;
-      const infoColEnd = layout.leftMargin + layout.contentWidth;
-      const isInfoClick = event.y === layout.logoRow && (event.x ?? 0) >= infoColStart && (event.x ?? 0) <= infoColEnd;
-      if (isInfoClick) {
-        if (state.mode === AppMode.About) {
-          restartSession(state);
-        } else {
-          transitionToAbout(state);
-        }
-        return;
-      }
-    }
+
 
     if (event.ctrl && event.name === 'c') {
       state.running = false;
@@ -314,12 +300,7 @@ function handleResultsInput(state: AppState, event: KeyEvent): void {
 
 }
 
-function handleAboutInput(state: AppState, event: KeyEvent): void {
-  if (event.name === 'tab' || event.name === 'escape') {
-    restartSession(state);
-    return;
-  }
-}
+
 
 function handleCommandInput(state: AppState, event: KeyEvent): void {
 
@@ -379,21 +360,7 @@ function handleCommandInput(state: AppState, event: KeyEvent): void {
   endFrame();
 }
 
-function transitionToAbout(state: AppState): void {
-  state.mode = AppMode.About;
 
-  if (state.tickTimer) {
-    clearInterval(state.tickTimer);
-    state.tickTimer = null;
-  }
-
-  fillBackground();
-  beginFrame();
-  renderLogo();
-  renderAboutScreen();
-  renderFooter('about');
-  endFrame();
-}
 
 function transitionToResults(state: AppState): void {
   state.mode = AppMode.Results;
