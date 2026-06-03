@@ -99,191 +99,191 @@ Press `/` while idle to open the command palette overlay:
 
 ## 🎨 Themes
 
-1. **8008**
-2. **80s After Dark**
-3. **9009**
-4. **Aether**
-5. **Alduin**
-6. **Alpine**
-7. **Anti Hero**
-8. **Arch**
-9. **Aurora**
-10. **Beach**
-11. **Bento**
-12. **Bingsu**
-13. **Bliss**
-14. **Blue Dolphin**
-15. **Blueberry Dark**
-16. **Blueberry Light**
-17. **Botanical**
-18. **Bouquet**
-19. **Breeze**
-20. **Bushido**
-21. **Café**
-22. **Camping**
-23. **Carbon**
-24. **Catppuccin Frappé**
-25. **Catppuccin Mocha**
-26. **Chaos Theory**
-27. **Cheesecake**
-28. **Cherry Blossom**
-29. **Comfy**
-30. **Copper**
-31. **Creamsicle**
-32. **Cy Red**
-33. **Cyberspace**
-34. **Dark Magic Girl**
-35. **Dark Note**
-36. **Darling**
-37. **Deku**
-38. **Desert Oasis**
-39. **Dev**
-40. **Diner**
-41. **Dino**
-42. **Discord**
-43. **Dmg**
-44. **Dollar**
-45. **Dracula**
-46. **Drowning**
-47. **Dualshot**
-48. **Earthsong**
-49. **Everblush**
-50. **Evil Eye**
-51. **Ez Mode**
-52. **Fire**
-53. **Fledgling**
-54. **Fleuriste**
-55. **Floret**
-56. **Froyo**
-57. **Frozen Llama**
-58. **Fruit Chew**
-59. **Fundamentals**
-60. **Future Funk**
-61. **Github**
-62. **GitHub Dark**
-63. **Godspeed**
-64. **Graen**
-65. **Grand Prix**
-66. **Grape**
-67. **Gruvbox Dark**
-68. **Gruvbox Light**
-69. **Hammerhead**
-70. **Hanok**
-71. **Hedge**
-72. **Honey**
-73. **Horizon**
-74. **Husqy**
-75. **Iceberg Dark**
-76. **Iceberg Light**
-77. **Incognito**
-78. **Ishtar**
-79. **Iv Clover**
-80. **Iv Spade**
-81. **Joker**
-82. **Laser**
-83. **Lavender**
-84. **Leather**
-85. **Lil Dragon**
-86. **Lilac Mist**
-87. **Lime**
-88. **Luna**
-89. **Macroblank**
-90. **Magic Girl**
-91. **Mashu**
-92. **Matcha Moccha**
-93. **Material**
-94. **Matrix**
-95. **Menthol**
-96. **Metaverse**
-97. **Metropolis**
-98. **Miami**
-99. **Miami Nights**
-100. **Midnight**
-101. **Milkshake**
-102. **Mint**
-103. **Mizu**
-104. **Modern Dolch**
-105. **Modern Dolch Light**
-106. **Modern Ink**
-107. **Monokai Pro**
-108. **Moonlight**
-109. **Mountain**
-110. **Mr Sleeves**
-111. **Ms Cupcakes**
-112. **Muted**
-113. **Nautilus**
-114. **Nebula**
-115. **Night Runner**
-116. **Nord**
-117. **Nord Light**
-118. **Norse**
-119. **Oblivion**
-120. **Olive**
-121. **Olivia**
-122. **Onedark**
-123. **Our Theme**
-124. **Pale Nimbus**
-125. **Paper**
-126. **Passion Fruit**
-127. **Pastel**
-128. **Peach Blossom**
-129. **Peaches**
-130. **Pink Lemonade**
-131. **Pulse**
-132. **Purpleish**
-133. **Rainbow Trail**
-134. **Red Dragon**
-135. **Red Samurai**
-136. **Repose Dark**
-137. **Repose Light**
-138. **Retro**
-139. **Retrocast**
-140. **Rosé Pine**
-141. **Rose Pine Dawn**
-142. **Rose Pine Moon**
-143. **Rudy**
-144. **Ryujinscales**
-145. **Serika**
-146. **Serika Dark**
-147. **Serika Light**
-148. **Sewing Tin**
-149. **Sewing Tin Light**
-150. **Shoko**
-151. **Slambook**
-152. **Snes**
-153. **Soaring Skies**
-154. **Solarized Dark**
-155. **Solarized Light**
-156. **Solarized Osaka**
-157. **Sonokai**
-158. **Spiderman**
-159. **Stealth**
-160. **Strawberry**
-161. **Striker**
-162. **Suisei**
-163. **Sunset**
-164. **Superuser**
-165. **Sweden**
-166. **Tangerine**
-167. **Taro**
-168. **Terminal**
-169. **Terra**
-170. **Terrazzo**
-171. **Terror Below**
-172. **Tiramisu**
-173. **Tokyo Night**
-174. **Trackday**
-175. **Trance**
-176. **Tron Orange**
-177. **Vaporwave**
-178. **Vesper**
-179. **Vesper Light**
-180. **Viridescent**
-181. **Voc**
-182. **Vscode**
-183. **Watermelon**
-184. **Wavez**
-185. **Witch Girl**
+1. **8008** — Grey and pink classic keycap colorway
+2. **80s After Dark** — Neon cyber vibes under a dark sky
+3. **9009** — Vintage office beige and green keycaps style
+4. **Aether** — Dark cosmic palette with deep orange accents
+5. **Alduin** — Dark, dragon-inspired tones from Skyrim
+6. **Alpine** — Crisp, clean mountain air and ice-blue shades
+7. **Anti Hero** — Moody, dark theme with high contrast highlights
+8. **Arch** — Minimalist grey and blue inspired by Arch Linux
+9. **Aurora** — Cool northern lights color palette
+10. **Beach** — Sandy beige and ocean blue notes
+11. **Bento** — Warm red, blue, and clean white tones
+12. **Bingsu** — Creamy red beans and ice-cold white
+13. **Bliss** — Soft, calming pastel color palette
+14. **Blue Dolphin** — Deep oceanic blues and playful highlights
+15. **Blueberry Dark** — Deep violet and berry accents on a dark base
+16. **Blueberry Light** — Fresh berry tones on a bright background
+17. **Botanical** — Leafy greens and wooden tones
+18. **Bouquet** — Soft florals and sweet lavender hues
+19. **Breeze** — Refreshing light blue tones
+20. **Bushido** — Deep red and steel grey warrior tones
+21. **Café** — Warm coffee and cream palette
+22. **Camping** — Forest green and campfire orange
+23. **Carbon** — Clean dark grey and orange accents
+24. **Catppuccin Frappé** — Muted pastels on a mid-tone base
+25. **Catppuccin Mocha** — Warm pastel colors on a dark background
+26. **Chaos Theory** — Vibrant green and purple accents
+27. **Cheesecake** — Sweet strawberry pink and cream tones
+28. **Cherry Blossom** — Soft cherry blossom pink highlights
+29. **Comfy** — Cozy home tones with warm accents
+30. **Copper** — Metallic brown and warm rust accents
+31. **Creamsicle** — Orange and vanilla cream highlights
+32. **Cy Red** — High-contrast neon red accents
+33. **Cyberspace** — Deep tech cyber green and dark navy
+34. **Dark Magic Girl** — Magical violet and pink accents on dark
+35. **Dark Note** — Clean grey note-taking aesthetic
+36. **Darling** — Soft pink and white anime-inspired tones
+37. **Deku** — Heroic green, red, and white palette
+38. **Desert Oasis** — Sand dunes and warm blue pools
+39. **Dev** — Classic terminal code editor color scheme
+40. **Diner** — Vintage neon diner sign vibes
+41. **Dino** — Forest floor greens and prehistoric tones
+42. **Discord** — Cozy chat app blue-purple and dark grey
+43. **Dmg** — Retro handheld console grey and purple accents
+44. **Dollar** — Wealthy green notes and dark cash register tones
+45. **Dracula** — Bold purples and vivid greens
+46. **Drowning** — Deep blue and teal underwater shades
+47. **Dualshot** — Classic console controller grey and accent colors
+48. **Earthsong** — Natural green and brown woodsy tones
+49. **Everblush** — Cozy dark green and soft blush accents
+50. **Evil Eye** — Mystical dark blue and gold notes
+51. **Ez Mode** — High-readability basic neon highlights
+52. **Fire** — Hot orange and red embers on black
+53. **Fledgling** — Soft bird-feather grey and blue tones
+54. **Fleuriste** — Parisian flower shop greens and rose tones
+55. **Floret** — Muted botanical greens and soft cream
+56. **Froyo** — Cool yogurt white and fruit topping colors
+57. **Frozen Llama** — Playful purple and cyan llama tones
+58. **Fruit Chew** — Bright fruit candy pink and yellow highlights
+59. **Fundamentals** — Clean, basic high-contrast developer tones
+60. **Future Funk** — Vibrant retro-wave magenta and cyan
+61. **Github** — Clean default GitHub styling
+62. **GitHub Dark** — Clean, modern dark theme
+63. **Godspeed** — Space exploration yellow and blue-grey
+64. **Graen** — Organic green and cool dark tones
+65. **Grand Prix** — Racing green and yellow track stripes
+66. **Grape** — Sweet deep purple grape tones
+67. **Gruvbox Dark** — Retro warm color scheme
+68. **Gruvbox Light** — Warm sandy paper background with retro accents
+69. **Hammerhead** — Dark oceanic navy and neon blue shark tones
+70. **Hanok** — Traditional Korean wooden architecture tones
+71. **Hedge** — Manicured lawn green and dark stone
+72. **Honey** — Sweet gold and amber honey highlights
+73. **Horizon** — Warm sunset orange and purple sky
+74. **Husqy** — Arctic sled-dog grey and ice blue
+75. **Iceberg Dark** — Frosty deep blue iceberg under dark night
+76. **Iceberg Light** — Clean polar glacier white and cold blue
+77. **Incognito** — Stealthy monochrome shades of grey
+78. **Ishtar** — Ancient Mesopotamian gold and clay tones
+79. **Iv Clover** — Lucky green and white clover patch
+80. **Iv Spade** — Dark royal card game aesthetic
+81. **Joker** — Villainous green and purple comic vibes
+82. **Laser** — Cyberpunk retro magenta laser beams
+83. **Lavender** — Calming light purple floral shades
+84. **Leather** — Rich brown and tan saddle tones
+85. **Lil Dragon** — Cute cartoon purple and gold highlights
+86. **Lilac Mist** — Morning mist over lavender fields
+87. **Lime** — Sour green citrus fruit tones
+88. **Luna** — Moonlit blue and soft night sky shades
+89. **Macroblank** — Minimal vaporwave aesthetics
+90. **Magic Girl** — Pastel magical girl pink and mint
+91. **Mashu** — Cozy lavender and warm grey shield tones
+92. **Matcha Moccha** — Green tea matcha and creamy espresso tones
+93. **Material** — Google material design standard palette
+94. **Matrix** — Classic falling digital rain green-on-black
+95. **Menthol** — Cool, minty fresh light green notes
+96. **Metaverse** — Digital magenta and high-tech blue
+97. **Metropolis** — Art deco dark steel and golden window lights
+98. **Miami** — Retro neon pink and bright teal vibes
+99. **Miami Nights** — Dark synthwave neon pink and blue
+100. **Midnight** — Deep dark blue and starry highlights
+101. **Milkshake** — Soft strawberry, vanilla, and cherry highlights
+102. **Mint** — Fresh mint green and cool white notes
+103. **Mizu** — Clean spring water blue and clear white
+104. **Modern Dolch** — Sleek modern grey and teal keycaps
+105. **Modern Dolch Light** — Clean light grey with modern teal accents
+106. **Modern Ink** — Calligraphy brush black and ink bottle tones
+107. **Monokai Pro** — Classic vibrant syntax colors
+108. **Moonlight** — Cool night shadows and pale yellow moonbeams
+109. **Mountain** — Foggy peaks and cold granite grey
+110. **Mr Sleeves** — Warm beige and soft pink fabric tones
+111. **Ms Cupcakes** — Sweet bakery frosting pink and blue pastels
+112. **Muted** — Subdued tones for distraction-free typing
+113. **Nautilus** — Deep sea submarine navy and yellow accent
+114. **Nebula** — Far space cosmic purples and pinks
+115. **Night Runner** — Dark streets with running yellow safety stripes
+116. **Nord** — Arctic-inspired color palette
+117. **Nord Light** — Frosty clean light white and pastel accents
+118. **Norse** — Mythological cold sea and dark wood tones
+119. **Oblivion** — Classic grey code editor look
+120. **Olive** — Earthy greens and natural tones
+121. **Olivia** — Elegant rose gold and charcoal grey
+122. **Onedark** — Atom editor inspired coding theme
+123. **Our Theme** — Warm community-built cozy color scheme
+124. **Pale Nimbus** — Soft raincloud grey and blue sky notes
+125. **Paper** — Vintage notebook paper and dark ink
+126. **Passion Fruit** — Rich purple skin and bright gold seed accents
+127. **Pastel** — Sweet candy shop multi-color pastels
+128. **Peach Blossom** — Soft pink blossoms and green leaf notes
+129. **Peaches** — Juicy warm peach orange and cream
+130. **Pink Lemonade** — Refreshing sweet pink and yellow citrus
+131. **Pulse** — High contrast neon blue pulse waves
+132. **Purpleish** — Soft violet tones for calm typing
+133. **Rainbow Trail** — Colorful rainbow spectrum highlights
+134. **Red Dragon** — Fiery red and dark dragon scales
+135. **Red Samurai** — Deep red and golden armor accents
+136. **Repose Dark** — Subdued warm charcoal for restful typing
+137. **Repose Light** — Soft warm cream for clean typing
+138. **Retro** — Warm vintage terminal green and brown
+139. **Retrocast** — Old-school TV yellow and soft blue
+140. **Rosé Pine** — Soho vibes with muted rose tones
+141. **Rose Pine Dawn** — Soft morning sun over pine forests
+142. **Rose Pine Moon** — Cool moonlit evening pine forest tones
+143. **Rudy** — Deep blue and retro red football highlights
+144. **Ryujinscales** — Mystic golden-scaled dragon green and gold
+145. **Serika** — Cozy workspace yellow and dark slate
+146. **Serika Dark** — Monkeytype-inspired dark gold accent
+147. **Serika Light** — Monkeytype-inspired light variant
+148. **Sewing Tin** — Retro cookie tin blue and sewing needles
+149. **Sewing Tin Light** — Clean light blue sewing basket tones
+150. **Shoko** — Soft blue and cream school uniform tones
+151. **Slambook** — Fun teenage journal pink and bright blue
+152. **Snes** — Classic 16-bit console grey and purple buttons
+153. **Soaring Skies** — Flying high blue sky and white cloud tones
+154. **Solarized Dark** — Ethan Schoonover's precision palette
+155. **Solarized Light** — High-precision clean solarized light paper
+156. **Solarized Osaka** — Warm Japanese sunset solarized theme
+157. **Sonokai** — High-contrast warm neon coding colors
+158. **Spiderman** — Heroic web-slinger red and blue accents
+159. **Stealth** — Matte black and ultra-dark grey stealth mode
+160. **Strawberry** — Ripe sweet red strawberry tones
+161. **Striker** — Champion blue and white sports vibe
+162. **Suisei** — Sparkly idol blue and starry highlights
+163. **Sunset** — Golden hour orange and dusky purple sky
+164. **Superuser** — Classic hacker terminal green-on-black
+165. **Sweden** — Flag-inspired blue and yellow notes
+166. **Tangerine** — Sweet orange peel and fresh cream
+167. **Taro** — Creamy purple sweet potato root tones
+168. **Terminal** — Default classic high contrast terminal style
+169. **Terra** — Warm clay, soil, and earth tones
+170. **Terrazzo** — Stone speckle mosaic grey and brown
+171. **Terror Below** — Murky ocean deep green and warning green
+172. **Tiramisu** — Coffee espresso and cocoa powder brown
+173. **Tokyo Night** — Cool blue and purple tones
+174. **Trackday** — Racing asphalt grey and red-line indicator
+175. **Trance** — Neon electronic music festival vibes
+176. **Tron Orange** — Futuristic neon orange grid lines
+177. **Vaporwave** — 80s pink, purple, and retro-tech cyan
+178. **Vesper** — Minimalist dark charcoal with warm orange pop
+179. **Vesper Light** — Clean bright paper with warm orange accent
+180. **Viridescent** — Lush botanical garden green tones
+181. **Voc** — Dark theme with bright warning accents
+182. **Vscode** — Default VS Code dark editor layout colors
+183. **Watermelon** — Fresh juicy red melon and green rind
+184. **Wavez** — Dynamic oceanic teal waves
+185. **Witch Girl** — Magical witchy dark violet and neon green
 
 Switch themes instantly with `/theme <name>`.
 
