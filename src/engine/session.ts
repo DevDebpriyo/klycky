@@ -1,5 +1,4 @@
 
-
 export type SessionState = 'idle' | 'active' | 'finished';
 
 export interface CharResult {
@@ -200,7 +199,20 @@ export class TypingSession {
 
   handleBackspace(): void {
     if (this.state !== 'active') return;
-    if (this.currentCharIndex === 0) return;
+
+    // go back to previous word if it has errors
+    if (this.currentCharIndex === 0) {
+      if (this.currentWordIndex > 0) {
+        const prev = this.wordResults[this.currentWordIndex - 1];
+        if (prev.completed && !prev.correct) {
+          this.currentWordIndex--;
+          prev.completed = false;
+          this.currentCharIndex = prev.chars.length;
+          this.inputBuffer = prev.chars.map(c => c.typed).join('');
+        }
+      }
+      return;
+    }
 
     this.currentCharIndex--;
     this.inputBuffer = this.inputBuffer.slice(0, -1);
@@ -216,6 +228,26 @@ export class TypingSession {
 
   handleCtrlBackspace(): void {
     if (this.state !== 'active') return;
+
+    // if current word is empty, try going back to previous word
+    if (this.currentCharIndex === 0) {
+      if (this.currentWordIndex > 0) {
+        const prev = this.wordResults[this.currentWordIndex - 1];
+        if (prev.completed && !prev.correct) {
+          this.currentWordIndex--;
+          prev.completed = false;
+          // clear the whole previous word
+          for (let i = 0; i < prev.chars.length; i++) {
+            prev.chars[i].typed = '';
+            prev.chars[i].attempted = false;
+            prev.chars[i].correct = false;
+          }
+          this.currentCharIndex = 0;
+          this.inputBuffer = '';
+        }
+      }
+      return;
+    }
 
     const wordResult = this.wordResults[this.currentWordIndex];
     for (let i = 0; i < wordResult.chars.length; i++) {
@@ -243,7 +275,7 @@ export class TypingSession {
       if (i >= this.wordResults.length) break;
       const wr = this.wordResults[i];
       if (i < this.currentWordIndex) {
-        if (wr.correct) count += wr.word.length + 1; 
+        if (wr.correct) count += wr.word.length + 1;
       } else {
 
         for (let j = 0; j < this.currentCharIndex; j++) {
